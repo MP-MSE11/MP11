@@ -24,10 +24,6 @@
             android:name=".Singleplay"
             android:label="@string/title_activity_singleplay" >
         </activity>
-        <activity
-            android:name=".HTP"
-            android:label="@string/title_activity_htp" >
-        </activity>
     </application>
 
 </manifest>
