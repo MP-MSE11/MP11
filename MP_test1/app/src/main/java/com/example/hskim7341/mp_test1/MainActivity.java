@@ -10,6 +10,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -43,6 +44,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v){
                 Intent Creater_intent = new Intent(MainActivity.this, Activity2.class);
+                Toast.makeText(MainActivity.this, "clicked 3 button!!", Toast.LENGTH_SHORT).show();
                 startActivity(Creater_intent);
             }
         });
