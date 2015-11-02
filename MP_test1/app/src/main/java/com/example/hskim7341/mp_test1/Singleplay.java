@@ -7,29 +7,30 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.Toast;
-
-import java.util.ArrayList;
 import java.util.Collections;
-
-import static com.example.hskim7341.mp_test1.init_stage.*;
-
 
 public class Singleplay extends AppCompatActivity implements View.OnClickListener{
 
     private int[] index_array = new int[3];
     private int click_count=0;
     private int score = 0;
+    private int temp_index = 0;
+    private int finishcount = 0;
 
     init_stage i_stage = new init_stage();
+    check_match c_match = new check_match();
 
     public ImageButton[] ButtonArray = new ImageButton[9];
-
     public init_block[] button_block = new init_block[9];
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_singleplay);
+
+        for(int temp = 0; temp<9; temp++){
+            button_block[temp] = new init_block();
+        }
 
         ButtonArray[0] = (ImageButton)findViewById(R.id.block1);
         ButtonArray[1] = (ImageButton)findViewById(R.id.block2);
@@ -43,11 +44,21 @@ public class Singleplay extends AppCompatActivity implements View.OnClickListene
         ButtonArray[7] = (ImageButton)findViewById(R.id.block8);
         ButtonArray[8] = (ImageButton)findViewById(R.id.block9);
 
+        Collections.shuffle(i_stage.ranNumber);
+
         for(int i =0; i<9; i++){
             ButtonArray[i].setOnClickListener(this);
-            ButtonArray[i].setImageResource(i_stage.imagearray[i_stage.ranNumber.get(i)]);
+            temp_index = i_stage.ranNumber.get(i);
+            ButtonArray[i].setImageResource(i_stage.block_array[temp_index].image);
+            button_block[i].b_backcolor = i_stage.block_array[temp_index].back_color;
+            button_block[i].b_shapecolor = i_stage.block_array[temp_index].shape_color;
+            button_block[i].b_shape = i_stage.block_array[temp_index].shape;
         }
+
+        finishcount = c_match.check_finishcount(button_block);
     }
+
+
 
     public void onClick(View v)
     {

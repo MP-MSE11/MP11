@@ -6,8 +6,13 @@ import android.widget.ImageButton;
 /**
  * Created by hskim7341 on 2015-11-02.
  */
-public class init_block extends AppCompatActivity {
-    private int b_backcolor;
-    private int b_shapecolor;
-    private int b_shape;
+public class init_block {
+    public int b_backcolor;
+    public int b_shapecolor;
+    public int b_shape;
+    init_block(){
+        this.b_backcolor = 0;
+        this.b_shapecolor = 0;
+        this.b_shape = 0;
+    }
 }
