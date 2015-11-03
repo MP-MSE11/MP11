@@ -6,6 +6,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.text.FieldPosition;
@@ -25,6 +26,7 @@ public class Singleplay extends AppCompatActivity implements View.OnClickListene
 
     public ImageButton[] ButtonArray = new ImageButton[9];
     public init_block[] button_block = new init_block[9];
+    public TextView s_view;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,6 +49,8 @@ public class Singleplay extends AppCompatActivity implements View.OnClickListene
         ButtonArray[7] = (ImageButton)findViewById(R.id.block8);
         ButtonArray[8] = (ImageButton)findViewById(R.id.block9);
 
+        s_view = (TextView)findViewById(R.id.score_view);
+
         Collections.shuffle(i_stage.ranNumber);
 
         for(int i =0; i<9; i++){
@@ -59,6 +63,7 @@ public class Singleplay extends AppCompatActivity implements View.OnClickListene
             button_block[i].b_shape = i_stage.block_array[temp_index].shape;
         }
 
+        s_view.setText(String.format("Score : %d점",score));
         finishcount = i_stage.check_finishcount(button_block);
     }
 
@@ -78,9 +83,13 @@ public class Singleplay extends AppCompatActivity implements View.OnClickListene
                 if (click_count == 3) {
                        if(c_match.match(button_block[index_array[0]-1], button_block[index_array[1]-1], button_block[index_array[2]-1]) == 1){
                            Toast.makeText(this, "clicked "+ index_array[0] + ", " + index_array[1] + ", " + index_array[2] + " Button\n" + "정답. score + 1", Toast.LENGTH_SHORT).show();
+                           score++;
+                           s_view.setText(String.format("Score : %d점",score));
                        }
                        else{
                            Toast.makeText(this, "clicked "+ index_array[0] + ", " + index_array[1] + ", " + index_array[2] + " Button\n"+ "합이 아닙니다. score - 1", Toast.LENGTH_SHORT).show();
+                           score--;
+                           s_view.setText(String.format("Score : %d점",score));
                        }
                     click_count = 0;
                 }

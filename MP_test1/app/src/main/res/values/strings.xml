@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">"결! 합!"</string>
 
-    <string name="wake_Up">"Wake Up!!!"</string>
+    <string name="wake_Up">"Brain Pop"</string>
     <string name="single">Single Play Mode</string>
     <string name="creater">"Made by"</string>
     <string name="htp">"How To Play???"</string>
