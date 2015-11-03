@@ -7,6 +7,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.Toast;
+
+import java.text.FieldPosition;
 import java.util.Collections;
 
 public class Singleplay extends AppCompatActivity implements View.OnClickListener{
@@ -16,6 +18,7 @@ public class Singleplay extends AppCompatActivity implements View.OnClickListene
     private int score = 0;
     private int temp_index = 0;
     private int finishcount = 0;
+    int position = 0;
 
     init_stage i_stage = new init_stage();
     check_match c_match = new check_match();
@@ -47,6 +50,7 @@ public class Singleplay extends AppCompatActivity implements View.OnClickListene
         Collections.shuffle(i_stage.ranNumber);
 
         for(int i =0; i<9; i++){
+            ButtonArray[i].setTag(i);
             ButtonArray[i].setOnClickListener(this);
             temp_index = i_stage.ranNumber.get(i);
             ButtonArray[i].setImageResource(i_stage.block_array[temp_index].image);
@@ -55,22 +59,36 @@ public class Singleplay extends AppCompatActivity implements View.OnClickListene
             button_block[i].b_shape = i_stage.block_array[temp_index].shape;
         }
 
-        finishcount = c_match.check_finishcount(button_block);
+        finishcount = i_stage.check_finishcount(button_block);
     }
 
 
 
     public void onClick(View v)
     {
-        if(click_count<3){
-            index_array[click_count] = click_count+1;
-            click_count++;
-        }
-        if (click_count == 3) {
-            Toast.makeText(this, "clicked "+ index_array[2] +" Button", Toast.LENGTH_SHORT).show();
-            click_count = 0;
+        ImageButton newButton = (ImageButton) v;
+        for(ImageButton tempButton : ButtonArray)
+        {
+            if(tempButton == newButton){
+                position = (Integer)v.getTag();
+                if(click_count<3) {
+                    index_array[click_count] = position + 1;
+                    click_count++;
+                }
+                if (click_count == 3) {
+                       if(c_match.match(button_block[index_array[0]-1], button_block[index_array[1]-1], button_block[index_array[2]-1]) == 1){
+                           Toast.makeText(this, "clicked "+ index_array[0] + ", " + index_array[1] + ", " + index_array[2] + " Button\n" + "정답. score + 1", Toast.LENGTH_SHORT).show();
+                       }
+                       else{
+                           Toast.makeText(this, "clicked "+ index_array[0] + ", " + index_array[1] + ", " + index_array[2] + " Button\n"+ "합이 아닙니다. score - 1", Toast.LENGTH_SHORT).show();
+                       }
+                    click_count = 0;
+                }
+            }
         }
     }
+
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

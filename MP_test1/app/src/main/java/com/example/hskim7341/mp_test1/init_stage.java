@@ -16,6 +16,7 @@ public class init_stage{
             R.drawable.wbc, R.drawable.wbs, R.drawable.wbt, R.drawable.wrc, R.drawable.wrs, R.drawable.wrt, R.drawable.wyc, R.drawable.wys, R.drawable.wyt};
 
     ArrayList<Integer> ranNumber = new ArrayList<Integer>();
+    check_match c_match = new check_match();
     public init_image[] block_array = new init_image[27];
 
     init_stage(){
@@ -50,7 +51,23 @@ public class init_stage{
                 block_array[temp].shape = 2;
             }
         }
-
+    }
+    int check_finishcount(init_block[] b_block){
+        int count = 0;
+        int a = 0;
+        int b = 0;
+        int c = 0;
+        int[] temp = new int[3];
+        for(a = 0; a < 9; a++){
+            for( b = a+1; b < 9; b++){
+                for(c = b+1; c <  9; c++){
+                    if(c_match.match(b_block[a], b_block[b], b_block[c]) == 1){
+                        count++;
+                    }
+                }
+            }
+        }
+        return count;
     }
 
 }
