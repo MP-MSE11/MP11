@@ -6,7 +6,7 @@
     <string name="creater">"Made by"</string>
     <string name="htp">"How To Play???"</string>
     <string name="action_settings">Settings</string>
-    <string name="creater_name">"Created by MSE.DKU"</string>
+    <string name="creater_name">"Created by MSE.DKU\n\nKim Min-Hwan\nKim Hyo-Sang\nChoi Ji-Soo"</string>
 
     <string name="Time_start">"Start"</string>
     <string name="Time_stop">"Stop"</string>
@@ -17,4 +17,5 @@
     <string name="Next">Next</string>
     <string name="title_activity_singleplay">Singleplay</string>
     <string name="title_activity_htp">HTP</string>
+    <string name="title_activity_ghmain">결! 합!</string>
 </resources>

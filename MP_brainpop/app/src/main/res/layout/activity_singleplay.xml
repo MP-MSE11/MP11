@@ -95,4 +95,16 @@
         android:layout_marginTop="10dp" />
 
 
+    <Button android:text="Back"
+        android:layout_width="80dp"
+        android:layout_height="50dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="10dp"
+        android:layout_marginLeft="5dp"
+        android:textSize="10sp"
+        android:textAlignment="center"
+        android:id="@+id/ghback_button" />
+
+
 </RelativeLayout>

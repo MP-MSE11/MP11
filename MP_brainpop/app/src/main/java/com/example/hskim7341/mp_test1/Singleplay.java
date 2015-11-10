@@ -1,10 +1,12 @@
 package com.example.hskim7341.mp_test1;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -20,6 +22,7 @@ public class Singleplay extends AppCompatActivity implements View.OnClickListene
     private int temp_index = 0;
     private int finishcount = 0;
     int position = 0;
+    Button back_button;
 
     init_stage i_stage = new init_stage();
     check_match c_match = new check_match();
@@ -50,6 +53,14 @@ public class Singleplay extends AppCompatActivity implements View.OnClickListene
         ButtonArray[8] = (ImageButton)findViewById(R.id.block9);
 
         s_view = (TextView)findViewById(R.id.score_view);
+
+        back_button = (Button)findViewById(R.id.ghback_button);
+        back_button.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                finish();
+            }
+        });
 
         Collections.shuffle(i_stage.ranNumber);
 
