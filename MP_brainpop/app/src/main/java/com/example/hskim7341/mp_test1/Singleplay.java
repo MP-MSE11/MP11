@@ -22,6 +22,7 @@ public class Singleplay extends AppCompatActivity implements View.OnClickListene
     private int score = 0;
     private int temp_index = 0;
     private int finishcount = 0;
+    private int finish_check_count = 0;
     int position = 0;
     Button back_button;
     ImageButton finish_button;
@@ -84,6 +85,7 @@ public class Singleplay extends AppCompatActivity implements View.OnClickListene
 
         s_view.setText(String.format("Score : %d점", score));
         finishcount = i_stage.check_finishcount(button_block);
+        finish_check_count = finishcount;
     }
 
 
@@ -109,13 +111,29 @@ public class Singleplay extends AppCompatActivity implements View.OnClickListene
                 if (click_count == 3) {
                     this.i_stage.uppersort(index_array);
                     if(c_match.match(button_block[index_array[0]-1], button_block[index_array[1]-1], button_block[index_array[2]-1]) == 1){
-                        Toast.makeText(this, "clicked "+ index_array[0] + ", " + index_array[1] + ", " + index_array[2] + " Button\n" + "정답. score + 1", Toast.LENGTH_SHORT).show();
-                        score++;
-                        finishcount--;
-                        s_view.setText(String.format("Score : %d점",score));
+                        for(int t = 0; t < finish_check_count; t ++){
+                            if(i_stage.hab_array[t][1] == index_array[0] - 1){
+                                if(i_stage.hab_array[t][2] == index_array[1] - 1) {
+                                    if(i_stage.hab_array[t][3] == index_array[2] - 1){
+                                        if(i_stage.hab_array[t][0] == 0){
+                                            Toast.makeText(this, "clicked "+ index_array[0] + ", " + index_array[1] + ", " + index_array[2] + " Button\n" + "정답. +1점", Toast.LENGTH_SHORT).show();
+                                            score++;
+                                            finishcount--;
+                                            i_stage.hab_array[t][0] = 1;
+                                            s_view.setText(String.format("Score : %d점",score));
+                                        }
+                                        else{
+                                            Toast.makeText(this, "clicked "+ index_array[0] + ", " + index_array[1] + ", " + index_array[2] + " Button\n" + "이미 선택하셨습니다. -1점", Toast.LENGTH_SHORT).show();
+                                            score--;
+                                            s_view.setText(String.format("Score : %d점", score));
+                                        }
+                                    }else continue;
+                                }else continue;
+                            }else continue;
+                        }
                     }
                     else{
-                        Toast.makeText(this, "clicked "+ index_array[0] + ", " + index_array[1] + ", " + index_array[2] + " Button\n"+ "합이 아닙니다. score - 1", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(this, "clicked "+ index_array[0] + ", " + index_array[1] + ", " + index_array[2] + " Button\n"+ "합이 아닙니다. -1점", Toast.LENGTH_SHORT).show();
                         score--;
                         s_view.setText(String.format("Score : %d점",score));
                     }

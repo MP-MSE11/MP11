@@ -20,7 +20,7 @@ public class init_stage{
     public init_image[] block_array = new init_image[27];
 
 
-    int[][] hab_array = new int[84][3];
+    int[][] hab_array = new int[84][4]; //[0]check_flag
 
     init_stage(){
         for(int a =0 ; a<27; a++){
@@ -67,9 +67,10 @@ public class init_stage{
                     if(c_match.match(b_block[a], b_block[b], b_block[c]) == 1){
                         temp[0] = a;    temp[1] = b;    temp[2] = c;
                         uppersort(temp);
-                        this.hab_array[count][0] = temp[0];
-                        this.hab_array[count][1] = temp[1];
-                        this.hab_array[count][2] = temp[2];
+                        this.hab_array[count][0] = 0;
+                        this.hab_array[count][1] = temp[0];
+                        this.hab_array[count][2] = temp[1];
+                        this.hab_array[count][3] = temp[2];
                         count++;
                     }
                 }
