@@ -33,7 +33,6 @@ public class Singleplay extends AppCompatActivity implements View.OnClickListene
     public ImageButton[] ButtonArray = new ImageButton[9];
     public init_block[] button_block = new init_block[9];
     public TextView s_view;
-    public TextView hab_view;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
