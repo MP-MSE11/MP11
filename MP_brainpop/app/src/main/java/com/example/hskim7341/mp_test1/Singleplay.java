@@ -1,6 +1,7 @@
 package com.example.hskim7341.mp_test1;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -23,6 +24,7 @@ public class Singleplay extends AppCompatActivity implements View.OnClickListene
     private int finishcount = 0;
     int position = 0;
     Button back_button;
+    ImageButton finish_button;
 
     init_stage i_stage = new init_stage();
     check_match c_match = new check_match();
@@ -30,6 +32,7 @@ public class Singleplay extends AppCompatActivity implements View.OnClickListene
     public ImageButton[] ButtonArray = new ImageButton[9];
     public init_block[] button_block = new init_block[9];
     public TextView s_view;
+    public TextView hab_view;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,6 +64,9 @@ public class Singleplay extends AppCompatActivity implements View.OnClickListene
                 finish();
             }
         });
+        finish_button = (ImageButton)findViewById(R.id.finish_button);
+        finish_button.setOnClickListener(this);
+        finish_button.setImageResource(R.drawable.finish_button);
 
         Collections.shuffle(i_stage.ranNumber);
 
@@ -69,46 +75,89 @@ public class Singleplay extends AppCompatActivity implements View.OnClickListene
             ButtonArray[i].setOnClickListener(this);
             temp_index = i_stage.ranNumber.get(i);
             ButtonArray[i].setImageResource(i_stage.block_array[temp_index].image);
+            ButtonArray[i].setBackgroundColor(Color.WHITE);
             button_block[i].b_backcolor = i_stage.block_array[temp_index].back_color;
             button_block[i].b_shapecolor = i_stage.block_array[temp_index].shape_color;
             button_block[i].b_shape = i_stage.block_array[temp_index].shape;
+            button_block[i].b_position = 0;
         }
 
-        s_view.setText(String.format("Score : %d점",score));
+        s_view.setText(String.format("Score : %d점", score));
         finishcount = i_stage.check_finishcount(button_block);
     }
 
 
-
-    public void onClick(View v)
-    {
+    public void onClick(View v) {
         ImageButton newButton = (ImageButton) v;
-        for(ImageButton tempButton : ButtonArray)
-        {
-            if(tempButton == newButton){
-                position = (Integer)v.getTag();
-                if(click_count<3) {
+        int flag = 0;
+        for (ImageButton tempButton : ButtonArray) {
+            if (tempButton == newButton) {
+                flag = 1;
+                position = (Integer) v.getTag();
+                if (click_count < 3) {
                     index_array[click_count] = position + 1;
-                    click_count++;
+                    if (button_block[position].b_position == 0) {
+                        click_count++;
+                        button_block[position].b_position = 1;
+                        ButtonArray[position].setBackgroundColor(Color.LTGRAY);
+                    } else if (button_block[position].b_position == 1) {
+                        button_block[position].b_position = 0;
+                        click_count--;
+                        ButtonArray[position].setBackgroundColor(Color.WHITE);
+                    }
                 }
                 if (click_count == 3) {
-                       if(c_match.match(button_block[index_array[0]-1], button_block[index_array[1]-1], button_block[index_array[2]-1]) == 1){
-                           Toast.makeText(this, "clicked "+ index_array[0] + ", " + index_array[1] + ", " + index_array[2] + " Button\n" + "정답. score + 1", Toast.LENGTH_SHORT).show();
-                           score++;
-                           s_view.setText(String.format("Score : %d점",score));
-                       }
-                       else{
-                           Toast.makeText(this, "clicked "+ index_array[0] + ", " + index_array[1] + ", " + index_array[2] + " Button\n"+ "합이 아닙니다. score - 1", Toast.LENGTH_SHORT).show();
-                           score--;
-                           s_view.setText(String.format("Score : %d점",score));
-                       }
+                    this.i_stage.uppersort(index_array);
+                    if(c_match.match(button_block[index_array[0]-1], button_block[index_array[1]-1], button_block[index_array[2]-1]) == 1){
+                        Toast.makeText(this, "clicked "+ index_array[0] + ", " + index_array[1] + ", " + index_array[2] + " Button\n" + "정답. score + 1", Toast.LENGTH_SHORT).show();
+                        score++;
+                        finishcount--;
+                        s_view.setText(String.format("Score : %d점",score));
+                    }
+                    else{
+                        Toast.makeText(this, "clicked "+ index_array[0] + ", " + index_array[1] + ", " + index_array[2] + " Button\n"+ "합이 아닙니다. score - 1", Toast.LENGTH_SHORT).show();
+                        score--;
+                        s_view.setText(String.format("Score : %d점",score));
+                    }
+                    for(int t=0; t<3; t++){
+                        ButtonArray[index_array[t]-1].setBackgroundColor(Color.WHITE);
+                        button_block[index_array[t]-1].b_position = 0;
+                        index_array[t] = 0;
+                    }
                     click_count = 0;
                 }
             }
         }
+        if(flag == 0){
+            if(newButton == finish_button){
+                if (finishcount == 0) {
+                    Toast.makeText(Singleplay.this, "결. +3점", Toast.LENGTH_SHORT).show();
+                    score = score + 3;
+                    Collections.shuffle(i_stage.ranNumber);
+
+                    for(int i =0; i<9; i++){
+                        ButtonArray[i].setTag(i);
+                        ButtonArray[i].setOnClickListener(this);
+                        temp_index = i_stage.ranNumber.get(i);
+                        ButtonArray[i].setImageResource(i_stage.block_array[temp_index].image);
+                        ButtonArray[i].setBackgroundColor(Color.WHITE);
+                        button_block[i].b_backcolor = i_stage.block_array[temp_index].back_color;
+                        button_block[i].b_shapecolor = i_stage.block_array[temp_index].shape_color;
+                        button_block[i].b_shape = i_stage.block_array[temp_index].shape;
+                        button_block[i].b_position = 0;
+                    }
+
+                    s_view.setText(String.format("Score : %d점", score));
+                    finishcount = i_stage.check_finishcount(button_block);
+
+                } else {
+                    Toast.makeText(Singleplay.this, "결이 아닙니다. -1점", Toast.LENGTH_SHORT).show();
+                    score--;
+                    s_view.setText(String.format("Score : %d점", score));
+                }
+            }
+        }
     }
-
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

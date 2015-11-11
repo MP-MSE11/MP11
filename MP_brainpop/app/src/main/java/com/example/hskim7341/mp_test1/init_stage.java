@@ -19,6 +19,9 @@ public class init_stage{
     check_match c_match = new check_match();
     public init_image[] block_array = new init_image[27];
 
+
+    int[][] hab_array = new int[84][3];
+
     init_stage(){
         for(int a =0 ; a<27; a++){
             ranNumber.add(a);
@@ -62,12 +65,28 @@ public class init_stage{
             for( b = a+1; b < 9; b++){
                 for(c = b+1; c <  9; c++){
                     if(c_match.match(b_block[a], b_block[b], b_block[c]) == 1){
+                        temp[0] = a;    temp[1] = b;    temp[2] = c;
+                        uppersort(temp);
+                        this.hab_array[count][0] = temp[0];
+                        this.hab_array[count][1] = temp[1];
+                        this.hab_array[count][2] = temp[2];
                         count++;
                     }
                 }
             }
         }
         return count;
+    }
+
+    public void uppersort(int[] x){
+        int temp = 0;
+        for(int y =0; y < x.length; y++){
+            for(int z=y+1; z < x.length; z++){
+                if(x[y] > x[z]){
+                    temp = x[y];    x[y] = x[z];    x[z]=temp;
+                }
+            }
+        }
     }
 
 }

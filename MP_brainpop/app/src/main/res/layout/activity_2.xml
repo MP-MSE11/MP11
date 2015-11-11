@@ -9,11 +9,22 @@
     <TextView android:text="@string/creater_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="200dp"
+        android:layout_marginTop="150dp"
         android:layout_centerHorizontal="true"
         android:textStyle="bold"
         android:textSize="30dp"
         android:textAlignment="center"
         android:id="@+id/second_text" />
+
+    <Button android:text="Back"
+        android:layout_width="80dp"
+        android:layout_height="50dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="10dp"
+        android:layout_marginLeft="5dp"
+        android:textSize="10sp"
+        android:textAlignment="center"
+        android:id="@+id/cback_button" />
 
 </RelativeLayout>
