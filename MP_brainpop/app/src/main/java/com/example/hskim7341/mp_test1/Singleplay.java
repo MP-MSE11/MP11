@@ -166,6 +166,7 @@ public class Singleplay extends AppCompatActivity implements View.OnClickListene
 
                     s_view.setText(String.format("Score : %d점", score));
                     finishcount = i_stage.check_finishcount(button_block);
+                    finish_check_count = finishcount;
 
                 } else {
                     Toast.makeText(Singleplay.this, "결이 아닙니다. -1점", Toast.LENGTH_SHORT).show();
