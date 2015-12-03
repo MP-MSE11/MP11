@@ -21,8 +21,8 @@
             android:label="@string/title_activity_ghmain" >
         </activity>
         <activity
-            android:name=".Activity2"
-            android:label="@string/title_activity_2" >
+            android:name=".creater"
+            android:label="@string/title_creater" >
         </activity>
         <activity
             android:name=".Singleplay"

@@ -41,8 +41,7 @@ public class MainActivity extends AppCompatActivity {
         creater_button.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
-                Intent Creater_intent = new Intent(MainActivity.this, Activity2.class);
-                Toast.makeText(MainActivity.this, "clicked 3 button!!", Toast.LENGTH_SHORT).show();
+                Intent Creater_intent = new Intent(MainActivity.this, creater.class);
                 startActivity(Creater_intent);
             }
         });

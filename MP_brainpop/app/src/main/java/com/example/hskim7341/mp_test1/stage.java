@@ -9,7 +9,7 @@ import java.util.Collections;
 /**
  * Created by hskim7341 on 2015-11-02.
  */
-public class init_stage{
+public class stage{
 
     public static final int imagearray[]= new int[]{R.drawable.bbc, R.drawable.bbs, R.drawable.bbt,R.drawable.brc, R.drawable.brs, R.drawable.brt, R.drawable.byc, R.drawable.bys, R.drawable.byt,
             R.drawable.gbc, R.drawable.gbs, R.drawable.gbt, R.drawable.grc, R.drawable.grs, R.drawable.grt, R.drawable.gyc, R.drawable.gys, R.drawable.gyt,
@@ -22,7 +22,7 @@ public class init_stage{
 
     int[][] hab_array = new int[84][4]; //[0]check_flag
 
-    init_stage(){
+    stage(){
         for(int a =0 ; a<27; a++){
             ranNumber.add(a);
             block_array[a] = new init_image();
@@ -55,7 +55,7 @@ public class init_stage{
             }
         }
     }
-    int check_finishcount(init_block[] b_block){
+    int check_finishcount(stage_block[] b_block){
         int count = 0;
         int a = 0;
         int b = 0;

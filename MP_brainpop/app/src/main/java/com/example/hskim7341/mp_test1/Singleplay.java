@@ -27,11 +27,11 @@ public class Singleplay extends AppCompatActivity implements View.OnClickListene
     Button back_button;
     ImageButton finish_button;
 
-    init_stage i_stage = new init_stage();
+    stage i_stage = new stage();
     check_match c_match = new check_match();
 
     public ImageButton[] ButtonArray = new ImageButton[9];
-    public init_block[] button_block = new init_block[9];
+    public stage_block[] button_block = new stage_block[9];
     public TextView s_view;
 
     @Override
@@ -40,7 +40,7 @@ public class Singleplay extends AppCompatActivity implements View.OnClickListene
         setContentView(R.layout.activity_singleplay);
 
         for(int temp = 0; temp<9; temp++){
-            button_block[temp] = new init_block();
+            button_block[temp] = new stage_block();
         }
 
         ButtonArray[0] = (ImageButton)findViewById(R.id.block1);

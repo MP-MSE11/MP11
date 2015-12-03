@@ -4,7 +4,7 @@ public class check_match{
     check_match(){
 
     }
-    int match(init_block button1, init_block button2, init_block button3){
+    int match(stage_block button1, stage_block button2, stage_block button3){
         if(button1.b_shape == button2.b_shape && button2.b_shape == button3.b_shape){
             if(button1.b_shapecolor == button2.b_shapecolor && button2.b_shapecolor == button3.b_shapecolor){
                 if(button1.b_backcolor == button2.b_backcolor && button2.b_backcolor == button3.b_backcolor){
