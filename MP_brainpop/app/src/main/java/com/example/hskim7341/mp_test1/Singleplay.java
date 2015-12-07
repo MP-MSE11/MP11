@@ -30,7 +30,6 @@ public class Singleplay extends AppCompatActivity implements View.OnClickListene
     stage i_stage = new stage();
     check_match c_match = new check_match();
 
-    public ImageButton[] ButtonArray = new ImageButton[9];
     public stage_block[] button_block = new stage_block[9];
     public TextView s_view;
 
@@ -43,17 +42,17 @@ public class Singleplay extends AppCompatActivity implements View.OnClickListene
             button_block[temp] = new stage_block();
         }
 
-        ButtonArray[0] = (ImageButton)findViewById(R.id.block1);
-        ButtonArray[1] = (ImageButton)findViewById(R.id.block2);
-        ButtonArray[2] = (ImageButton)findViewById(R.id.block3);
+        button_block[0].b_button = (ImageButton)findViewById(R.id.block1);
+        button_block[1].b_button = (ImageButton)findViewById(R.id.block2);
+        button_block[2].b_button = (ImageButton)findViewById(R.id.block3);
 
-        ButtonArray[3] = (ImageButton)findViewById(R.id.block4);
-        ButtonArray[4] = (ImageButton)findViewById(R.id.block5);
-        ButtonArray[5] = (ImageButton)findViewById(R.id.block6);
+        button_block[3].b_button = (ImageButton)findViewById(R.id.block4);
+        button_block[4].b_button = (ImageButton)findViewById(R.id.block5);
+        button_block[5].b_button = (ImageButton)findViewById(R.id.block6);
 
-        ButtonArray[6] = (ImageButton)findViewById(R.id.block7);
-        ButtonArray[7] = (ImageButton)findViewById(R.id.block8);
-        ButtonArray[8] = (ImageButton)findViewById(R.id.block9);
+        button_block[6].b_button = (ImageButton)findViewById(R.id.block7);
+        button_block[7].b_button = (ImageButton)findViewById(R.id.block8);
+        button_block[8].b_button = (ImageButton)findViewById(R.id.block9);
 
         s_view = (TextView)findViewById(R.id.score_view);
 
@@ -71,11 +70,11 @@ public class Singleplay extends AppCompatActivity implements View.OnClickListene
         Collections.shuffle(i_stage.ranNumber);
 
         for(int i =0; i<9; i++){
-            ButtonArray[i].setTag(i);
-            ButtonArray[i].setOnClickListener(this);
+            button_block[i].b_button.setTag(i);
+            button_block[i].b_button.setOnClickListener(this);
             temp_index = i_stage.ranNumber.get(i);
-            ButtonArray[i].setImageResource(i_stage.block_array[temp_index].image);
-            ButtonArray[i].setBackgroundColor(Color.WHITE);
+            button_block[i].b_button.setImageResource(i_stage.block_array[temp_index].image);
+            button_block[i].b_button.setBackgroundColor(Color.WHITE);
             button_block[i].b_backcolor = i_stage.block_array[temp_index].back_color;
             button_block[i].b_shapecolor = i_stage.block_array[temp_index].shape_color;
             button_block[i].b_shape = i_stage.block_array[temp_index].shape;
@@ -91,7 +90,9 @@ public class Singleplay extends AppCompatActivity implements View.OnClickListene
     public void onClick(View v) {
         ImageButton newButton = (ImageButton) v;
         int flag = 0;
-        for (ImageButton tempButton : ButtonArray) {
+        ImageButton tempButton;
+        for (int i =0; i<9; i++) {
+            tempButton = button_block[i].b_button;
             if (tempButton == newButton) {
                 flag = 1;
                 position = (Integer) v.getTag();
@@ -100,11 +101,11 @@ public class Singleplay extends AppCompatActivity implements View.OnClickListene
                     if (button_block[position].b_position == 0) {
                         click_count++;
                         button_block[position].b_position = 1;
-                        ButtonArray[position].setBackgroundColor(Color.LTGRAY);
+                        button_block[position].b_button.setBackgroundColor(Color.LTGRAY);
                     } else if (button_block[position].b_position == 1) {
                         button_block[position].b_position = 0;
                         click_count--;
-                        ButtonArray[position].setBackgroundColor(Color.WHITE);
+                        button_block[position].b_button.setBackgroundColor(Color.WHITE);
                     }
                 }
                 if (click_count == 3) {
@@ -137,7 +138,7 @@ public class Singleplay extends AppCompatActivity implements View.OnClickListene
                         s_view.setText(String.format("Score : %d점",score));
                     }
                     for(int t=0; t<3; t++){
-                        ButtonArray[index_array[t]-1].setBackgroundColor(Color.WHITE);
+                        button_block[index_array[t]-1].b_button.setBackgroundColor(Color.WHITE);
                         button_block[index_array[t]-1].b_position = 0;
                         index_array[t] = 0;
                     }
@@ -153,11 +154,11 @@ public class Singleplay extends AppCompatActivity implements View.OnClickListene
                     Collections.shuffle(i_stage.ranNumber);
 
                     for(int i =0; i<9; i++){
-                        ButtonArray[i].setTag(i);
-                        ButtonArray[i].setOnClickListener(this);
+                        button_block[i].b_button.setTag(i);
+                        button_block[i].b_button.setOnClickListener(this);
                         temp_index = i_stage.ranNumber.get(i);
-                        ButtonArray[i].setImageResource(i_stage.block_array[temp_index].image);
-                        ButtonArray[i].setBackgroundColor(Color.WHITE);
+                        button_block[i].b_button.setImageResource(i_stage.block_array[temp_index].image);
+                        button_block[i].b_button.setBackgroundColor(Color.WHITE);
                         button_block[i].b_backcolor = i_stage.block_array[temp_index].back_color;
                         button_block[i].b_shapecolor = i_stage.block_array[temp_index].shape_color;
                         button_block[i].b_shape = i_stage.block_array[temp_index].shape;
